@@ -52,6 +52,18 @@ module.exports = {
         res.status(404).json({ message: "No user with that ID" });
       };
 
+      const thoughts = await Thought.updateMany(
+        { _id: { $in: user.thoughts } },
+        { $set: { username: req.body.username }},
+        { new: true }
+      );
+
+      if (!thoughts) {
+        return res.status(404).json({
+          message: "User updated, but no thoughts found",
+        });
+      }
+
       res.json(user);
     } catch (err) {
       console.log(err);
@@ -69,10 +81,8 @@ module.exports = {
         return res.status(404).json({ message: "No such user exists" });
       }
 
-      const thoughts = await Thought.findOneAndUpdate(
-        { users: req.params.username },
-        { $pull: { users: req.params.username } },
-        { new: true }
+      const thoughts = await Thought.deleteMany(
+        { _id: { $in: user.thoughts } }
       );
 
       if (!thoughts) {
