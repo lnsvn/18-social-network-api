@@ -24,7 +24,7 @@ Social Network API is a back-end application that allows users to share their th
 
 ## Visual
 
-[![](image)](link)
+[![](./image/demo.png)](https://drive.google.com/file/d/1AB8c99UOcJdgoTO806NFszdUfYhHRqmH/view)
 
 ## Usage
 
